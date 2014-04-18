@@ -1,11 +1,9 @@
-<div class="container-fluid full-size">
-  <div class="row full-size">
+<div class="container-fluid full-height">
+  <div class="row full-height">
 
-    <div ng-controller="PokerCtrl" id="poker-table" class="col-md-9 full-height">
-    </div>
+    <div ng-include="'partials/poker.html'" id="poker-pane" class="col-md-9 full-height"></div>
 
-    <div ng-controller="ChatCtrl" id="chat-pane" class="col-md-3 full-height">
-    </div>
+    <div ng-include="'partials/chat.html'" id="chat-pane" class="col-md-3 full-height"></div>
 
   </div>
 </div>
