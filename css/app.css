@@ -1,6 +1,11 @@
 /* app css stylesheet */
 
-body {
+#poker-table {
   background-image: url('../images/table.png');
+  background-repeat: repeat;
+}
+
+#chat-pane {
+  background-image: url('../images/chat_pane.png');
   background-repeat: repeat;
 }

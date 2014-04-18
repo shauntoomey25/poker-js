@@ -2,4 +2,4 @@
 
 /* Services */
 
-// TODO
+var app = angular.module('pokerJS.services', []);
