@@ -2,16 +2,16 @@
 
 /* Controllers */
 
-var app = angular.module('pokerJS.controllers', []);
+angular.module('pokerJS.controllers', [])
 
-app.controller('MainCtrl', [function() {
-  // Stuff goes here
-}]);
+  .controller('MainCtrl', [function() {
+    // Stuff goes here
+  }])
 
-app.controller('PokerCtrl', [function() {
-  // Stuff goes here
-}]);
+  .controller('PokerCtrl', [function() {
+    // Stuff goes here
+  }])
 
-app.controller('ChatCtrl', [function() {
-  // Stuff goes here
-}]);
+  .controller('ChatCtrl', [function() {
+    // Stuff goes here
+  }]);
