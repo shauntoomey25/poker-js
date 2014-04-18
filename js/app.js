@@ -2,7 +2,8 @@
 
 // Declare app level module which depends on filters, and services
 angular.module('pokerJS', [
-  'ngRoute',  
+  'ngRoute',
+  'ngAnimate',
   'pokerJS.services',
   'pokerJS.controllers'
 ]).

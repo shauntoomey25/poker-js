@@ -15,10 +15,41 @@ html, body {
   height: 100%;
 }
 
-#poker-table {
+/* Poker Pane */
+
+#poker-pane {
   background-image: url('../images/table.png');
   background-repeat: repeat;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
+
+#shadow-box {
+  background: #111;
+  opacity: 0.6;
+}
+
+#loading-container {
+  position: absolute;
+  top: 50%;
+  margin-top: -160px;
+  left: 0px;
+  width: 100%;
+}
+
+#loading {
+  width: 800px;
+  height: 120px;
+  margin-left: auto;
+  margin-right: auto; 
+  background: #ccc;
+  border-radius: 10px;
+  opacity: 1.0;
+  text-align: center;
+  font-size: 48pt;
+}
+
+/* Chat Pane */
 
 #chat-pane {
   background-image: url('../images/chat_pane.png');

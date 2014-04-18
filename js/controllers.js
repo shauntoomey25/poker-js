@@ -8,8 +8,8 @@ angular.module('pokerJS.controllers', [])
     // Stuff goes here
   }])
 
-  .controller('PokerCtrl', [function() {
-    // Stuff goes here
+  .controller('PokerCtrl', ['$scope', function($scope) {
+    $scope.isWaitingForMatch = true;
   }])
 
   .controller('ChatCtrl', [function() {
