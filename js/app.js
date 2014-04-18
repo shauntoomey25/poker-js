@@ -7,6 +7,11 @@ angular.module('pokerJS', [
   'pokerJS.services',
   'pokerJS.controllers'
 ]).
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/', {templateUrl: 'partials/main.html', controller: 'MainCtrl'});
+config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+  $routeProvider
+    .when('/', {
+      templateUrl: 'partials/main.html',
+      controller: 'MainCtrl'
+    });
+  $locationProvider.html5Mode(true);
 }]);
