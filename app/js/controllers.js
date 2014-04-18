@@ -4,8 +4,17 @@
 
 angular.module('pokerJS.controllers', [])
 
-  .controller('MainCtrl', [function() {
-    // Stuff goes here
+  .controller('MainCtrl', ['$location', function($location) {
+    
+    (function() {
+      var urlParams = $location.search();
+      if(urlParams.lobby) {
+        alert("Lobby given: " + urlParams.lobby);
+      } else {
+        alert("Use Chromecast here");
+      }
+    })();
+
   }])
 
   .controller('PokerCtrl', ['$scope', function($scope) {
