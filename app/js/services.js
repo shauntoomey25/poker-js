@@ -4,4 +4,15 @@
 
 var app = angular.module('pokerJS.services', []);
 
-app.value('version', '0.1');
+app.service('EventService', function($rootScope) {
+
+  var rootScope = $rootScope;
+  var lobbyID = null;
+
+  this.setLobbyID = function(id) {
+    lobbyID = id;
+    socket.post('/public/subscribeToLobby', {lobby: lobbyID}, function(data) {
+      console.log(data);
+    });
+  };
+});
