@@ -4,23 +4,23 @@
 
 var app = angular.module('pokerJS.controllers', []);
 
-app.controller('MainCtrl', ['$location', function($location) {
+app.controller('MainCtrl', function($location, EventService) {
   
   (function() {
     var urlParams = $location.search();
     if(urlParams.lobby) {
-      alert("Lobby given: " + urlParams.lobby);
+      EventService.setLobbyID(urlParams.lobby);
     } else {
       alert("Use Chromecast here");
     }
   })();
 
-}]);
+});
 
-app.controller('PokerCtrl', ['$scope', function($scope) {
+app.controller('PokerCtrl', function($scope) {
   $scope.isWaitingForMatch = true;
-}]);
+});
 
-app.controller('ChatCtrl', [function() {
-  // Stuff goes here
-}]);
+app.controller('ChatCtrl', function($scope) {
+  $scope.messages = [];
+});
