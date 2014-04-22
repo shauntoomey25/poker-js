@@ -21,16 +21,21 @@ app.service('EventService', function($rootScope, UserService, MessagingService) 
     });
   };
 
-  socket.on('userAdded', function(message) {
-    UserService.addUser(message.data);  
-  });
+  // Wait until socket is connected before listening for events
+  socket.on('connect', function socketConnected() {
 
-  socket.on('newUserMessage', function(message) {
-    MessagingService.addMessage(message);
-  });
+    socket.on('userAdded', function(message) {
+      UserService.addUser(message.data);  
+    });
 
-  socket.on('newSystemMessage', function(message) {
-    MessagingService.addMessage(message);
+    socket.on('newUserMessage', function(message) {
+      MessagingService.addMessage(message);
+    });
+
+    socket.on('newSystemMessage', function(message) {
+      MessagingService.addMessage(message);
+    });
+
   });
 });
 
