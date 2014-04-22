@@ -24,16 +24,20 @@ app.service('EventService', function($rootScope, UserService, MessagingService) 
   // Wait until socket is connected before listening for events
   socket.on('connect', function socketConnected() {
 
-    socket.on('userAdded', function(message) {
-      UserService.addUser(message.data);  
-    });
+    socket.on('lobby', function(message) {
+      var data = message.data.data;
+      switch(message.data.event) {
 
-    socket.on('newUserMessage', function(message) {
-      MessagingService.addMessage(message);
-    });
+        case 'userAdded':
+          UserService.addUser(data);
+          break;
 
-    socket.on('newSystemMessage', function(message) {
-      MessagingService.addMessage(message);
+        case 'newUserMessage':
+        case 'newSystemMessage':
+          MessagingService.addMessage(data);
+          break;
+
+      };
     });
 
   });
