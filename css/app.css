@@ -4,6 +4,12 @@ html, body {
   height: 100%;
   width: 100%;
   margin: 0;
+  position: fixed;
+  overscroll: hidden;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
 }
 
 .full-size {
@@ -54,4 +60,24 @@ html, body {
 #chat-pane {
   background-image: url('../images/chat_pane.png');
   background-repeat: repeat;
+}
+
+#chat-pane-header {
+  color: white;
+  text-align: center;
+}
+
+#chat-pane-content {
+  color: white;
+  font-size: x-large;
+  overflow-y: hidden;
+}
+
+.message {
+  margin: 10px 0px;
+}
+
+.system-message {
+  color: gray;
+  text-align: center;
 }

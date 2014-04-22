@@ -5,7 +5,9 @@ var app = angular.module('pokerJS', [
   'ngRoute',
   'ngAnimate',
   'pokerJS.services',
-  'pokerJS.controllers'
+  'pokerJS.controllers',
+  'pokerJS.directives',
+  'luegg.directives'
 ]);
 
 app.config(function($routeProvider, $locationProvider) {
