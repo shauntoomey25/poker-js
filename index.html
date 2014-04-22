@@ -8,7 +8,10 @@
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css"/>
   <script>
+      // Ensure that links are relative to the proper root directory
       document.write('<base href="' + document.location + '" />');
+      // External namespace for chromecast javascript library
+      var cast = window.cast || {};
   </script>
 </head>
 
