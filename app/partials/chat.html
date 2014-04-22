@@ -1,2 +1,13 @@
-<div ng-controller="ChatCtrl" id="chat-pane" class="full-height">
+<div ng-controller="ChatCtrl" class="full-height">
+  <div id="chat-pane-header">
+    <h1>TITLE</h1>
+  </div>
+  <div id="chat-pane-content" ng-style="style()" resize-height scroll-glue>
+    <div ng-repeat="message in messages">
+      <span ng-switch on="message.isSystemMessage">
+        <div ng-switch-when="true" class="message system-message">{{message.content}}</div>
+        <div ng-switch-default class="message user-message">{{message.from.username}}:  {{message.content}}</div>
+      </div>
+    </div>
+  </div>
 </div>

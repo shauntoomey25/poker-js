@@ -49,6 +49,15 @@ app.controller('PokerCtrl', function($scope) {
   $scope.isWaitingForMatch = true;
 });
 
-app.controller('ChatCtrl', function($scope) {
+app.controller('ChatCtrl', function($scope, $rootScope, $timeout) {
+
+  // Scope
   $scope.messages = [];
+
+  // Listeners
+  $rootScope.$on('newMessage', function(e, msg) {
+    $scope.$apply(function(){
+        $scope.messages.push(msg);
+    });
+  });
 });
