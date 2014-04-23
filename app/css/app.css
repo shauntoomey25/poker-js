@@ -63,8 +63,11 @@ html, body {
 }
 
 #chat-pane-header {
+  position: static;
+  top: 0px;
   color: white;
   text-align: center;
+  text-decoration: underline;
 }
 
 #chat-pane-content {

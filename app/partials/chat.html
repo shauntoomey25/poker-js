@@ -1,7 +1,5 @@
 <div ng-controller="ChatCtrl" class="full-height">
-  <div id="chat-pane-header">
-    <h1>TITLE</h1>
-  </div>
+  <h1 id="chat-pane-header">{{chat_title}}</h1>
   <div id="chat-pane-content" ng-style="style()" resize-height scroll-glue>
     <div ng-repeat="message in messages">
       <span ng-switch on="message.isSystemMessage">

@@ -52,9 +52,16 @@ app.controller('PokerCtrl', function($scope) {
 app.controller('ChatCtrl', function($scope, $rootScope, $timeout) {
 
   // Scope
+  $scope.chat_title = "";
   $scope.messages = [];
 
   // Listeners
+  $rootScope.$on('lobbyNameChanged', function(e, lobbyName) {
+    $scope.$apply(function() {
+      $scope.chat_title = lobbyName;
+    });
+  });
+
   $rootScope.$on('newMessage', function(e, msg) {
     $scope.$apply(function(){
         $scope.messages.push(msg);

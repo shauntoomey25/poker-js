@@ -37,8 +37,9 @@
   <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
   <script>
     // Make request to server to get cookie
-    $.get('http://gameframe.dyndns.org/ping', function() {
-      socket = io.connect('http://gameframe.dyndns.org');
+    serverURL = 'http://gameframe.dyndns.org';
+    $.get(serverURL+'/ping', function() {
+      socket = io.connect(serverURL);
       angular.bootstrap(document, ['pokerJS']);
     });
   </script>
