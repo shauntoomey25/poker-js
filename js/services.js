@@ -4,22 +4,20 @@
 
 var app = angular.module('pokerJS.services', []);
 
-app.service('EventService', function($rootScope, UserService, MessagingService) {
-
-  var rootScope = $rootScope;
-  var lobbyID = null;
+app.service('EventService', function($rootScope, UserService, MessagingService, LobbyConfigService) {
 
   // Bootstrap Function
   // Must set Lobby ID before anything can be populated
-  this.setLobbyID = function(id) {
-    lobbyID = id;
-    socket.post('/public/subscribeToLobby', {lobby: lobbyID}, function(lobby) {
+  this.setLobbyID = angular.bind($rootScope, function(id) {
+    $rootScope.lobbyID = id;
+    socket.post('/public/subscribeToLobby', {lobby: id}, function(lobby) {
       var afterAllUsersRetrieved = function() {
         MessagingService.addMessages(lobby.messages);
+        LobbyConfigService.init(lobby);
       };
       UserService.addUsersFromLobby(lobby, afterAllUsersRetrieved);
     });
-  };
+  });
 
   // Wait until socket is connected before listening for events
   socket.on('connect', function socketConnected() {
@@ -35,6 +33,10 @@ app.service('EventService', function($rootScope, UserService, MessagingService) 
         case 'newUserMessage':
         case 'newSystemMessage':
           MessagingService.addMessage(data);
+          break;
+
+        case 'hostChanged':
+          LobbyConfigService.changeHost(data);
           break;
 
       };
@@ -118,6 +120,27 @@ app.service('MessagingService', function($rootScope, UserService) {
 
   this.getMessages = function() {
     return messages;
+  };
+});
+
+app.service('LobbyConfigService', function($rootScope, UserService) {
+
+  var host = null;
+  var name = null;
+
+  this.init = function(lobby) {
+    this.changeName(lobby.name);
+    this.changeHost(lobby.host);
+  };
+
+  this.changeName = function(newName) {
+    name = newName;
+    $rootScope.$emit('lobbyNameChanged', name);
+  };
+
+  this.changeHost = function(newHostID) {
+    host = UserService.userWithID(newHostID);
+    $rootScope.$emit('hostChanged', host);
   };
 });
 
