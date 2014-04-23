@@ -17,13 +17,11 @@ app.controller('MainCtrl', function($location, EventService) {
 
     } else if(navigator.userAgent.indexOf("crKey") > -1) {
 
-    	alert("Reached");
       // Connecting via Chromecast
     	this.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
     	this.customMessageBus = castReceiverManager.getCastMessageBus('urn:x-cast:com.gameframe.pokergame');
     	this.customMessageBus.onMessage = function(event) {
     		var message = event.data;
-    		alert(message);
     		if(message.command == 'start') {
       		EventService.setLobbyID(message.lobby);
     		}
