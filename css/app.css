@@ -30,6 +30,27 @@ html, body {
   padding-right: 0px !important;
 }
 
+#poker-pane-header {
+  color: white;
+  font-size: 64px;
+  text-align: center;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+  font-family: 'medicine_show_capsregular';
+  margin-bottom: 20px;
+}
+
+.card-row {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.card-container {
+  display: table-cell;
+  width: 100%;
+  text-align: center;
+}
+
 #shadow-box {
   background: #111;
   opacity: 0.6;
@@ -63,11 +84,11 @@ html, body {
 }
 
 #chat-pane-header {
-  position: static;
-  top: 0px;
   color: white;
+  font-size: x-large;
   text-align: center;
   text-decoration: underline;
+  text-shadow: 2px 2px 2px rgba(150, 150, 150, 0.8);
 }
 
 #chat-pane-content {
