@@ -45,25 +45,30 @@ app.controller('MainCtrl', function($location, EventService) {
 
 });
 
-app.controller('PokerCtrl', function($scope) {
+app.controller('PokerCtrl', function($scope, $rootScope) {
+
+  // Scope
   $scope.isWaitingForMatch = true;
+  $scope.lobby_name = "";
+
+  // Listeners
+  $rootScope.$on('lobbyNameChanged', function(e, lobbyName) {
+    $scope.$apply(function() {
+      $scope.lobby_name = lobbyName.toUpperCase();
+    });
+  });
 });
 
 app.controller('ChatCtrl', function($scope, $rootScope, $timeout) {
 
   // Scope
-  $scope.chat_title = "";
   $scope.messages = [];
+  $scope.chat_title = "";
 
   // Listeners
-  $rootScope.$on('lobbyNameChanged', function(e, lobbyName) {
-    $scope.$apply(function() {
-      $scope.chat_title = lobbyName;
-    });
-  });
-
   $rootScope.$on('newMessage', function(e, msg) {
     $scope.$apply(function(){
+        $scope.chat_title = "Lobby Chat";
         $scope.messages.push(msg);
     });
   });
