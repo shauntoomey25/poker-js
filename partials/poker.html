@@ -15,21 +15,12 @@
 
   <h1 id="poker-pane-header">{{lobby_name}}</h1>
 
-  <div class="card-row">
-    <div class="card-container">
-      <img src="/images/cards/Red_Back.svg">
-    </div>
-    <div class="card-container">
-      <img src="/images/cards/Red_Back.svg">
-    </div>
-    <div class="card-container">
-      <img src="/images/cards/Red_Back.svg">
-    </div>
-    <div class="card-container">
-      <img src="/images/cards/Red_Back.svg">
-    </div>
-    <div class="card-container">
-      <img src="/images/cards/Red_Back.svg">
+  <div class="card-row">  
+    <div ng-repeat="card in communityCards" class="card-container">
+      <div ng-switch on="card.isShowing" class="card">
+        <img ng-switch-when="true" ng-src="/images/cards/{{card.suit}}-{{card.rank}}.svg">
+        <img ng-switch-default ng-src="/images/cards/Red_Back.svg">
+      </div>
     </div>
   </div>
 
