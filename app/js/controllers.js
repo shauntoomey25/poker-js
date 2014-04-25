@@ -50,11 +50,29 @@ app.controller('PokerCtrl', function($scope, $rootScope) {
   // Scope
   $scope.isWaitingForMatch = true;
   $scope.lobby_name = "";
+  $scope.userInLock = null;
+  $scope.communityCards = null;
+  $scope.potSize = null;
 
   // Listeners
   $rootScope.$on('lobbyNameChanged', function(e, lobbyName) {
     $scope.$apply(function() {
       $scope.lobby_name = lobbyName.toUpperCase();
+    });
+  });
+
+  $rootScope.$on('lockUpdated', function(e, newLockUser) {
+    $scope.$apply(function() {
+      $scope.isWaitingForMatch = false;
+      $scope.userInLock = newLockUser;
+    });
+  });
+
+  $rootScope.$on('commonStateUpdated', function(e, state) {
+    $scope.$apply(function() {
+      $scope.isWaitingForMatch = false;
+      $scope.communityCards = state.communityCards;
+      $scope.potSize = state.pot;
     });
   });
 });

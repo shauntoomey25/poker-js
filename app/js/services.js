@@ -4,16 +4,22 @@
 
 var app = angular.module('pokerJS.services', []);
 
-app.service('EventService', function($rootScope, UserService, MessagingService, LobbyConfigService) {
+app.service('EventService', function($rootScope, UserService, MessagingService, LobbyConfigService, GameStateService) {
 
   // Bootstrap Function
   // Must set Lobby ID before anything can be populated
   this.setLobbyID = angular.bind($rootScope, function(id) {
     $rootScope.lobbyID = id;
-    socket.post('/public/subscribeToLobby', {lobby: id}, function(lobby) {
+    socket.post('/public/subscribeToLobby', {lobby: id}, function(data) {
+      var lobby = data.lobby;
+      var commonState = data.commonState;
+      var lock = data.lock;
       var afterAllUsersRetrieved = function() {
         MessagingService.addMessages(lobby.messages);
         LobbyConfigService.init(lobby);
+        if(commonState && lock) {
+          GameStateService.init(commonState, lock);
+        }
       };
       UserService.addUsersFromLobby(lobby, afterAllUsersRetrieved);
     });
@@ -27,7 +33,7 @@ app.service('EventService', function($rootScope, UserService, MessagingService, 
       switch(message.data.event) {
 
         case 'userAdded':
-          UserService.addUser(data);
+          UserService.addUser(data.state);
           break;
 
         case 'newUserMessage':
@@ -42,6 +48,20 @@ app.service('EventService', function($rootScope, UserService, MessagingService, 
       };
     });
 
+    socket.on('match', function(message) {
+      var data = message.data.data;
+      switch(message.data.event) {
+
+        case 'commonStateUpdated':
+          GameStateService.updateCommonState(data.state);
+          break;
+
+        case 'turnover':
+          GameStateService.updateLock(data.turnoverTo);
+          break;
+
+      };
+    });
   });
 });
 
@@ -50,17 +70,17 @@ app.service('UserService', function($rootScope) {
   var userDict = {};
 
   this.addUser = function(user) {
-    if(user != null && user.id != null) {
+    if(user !== null && user.id !== null) {
       userDict[user.id] = user;
     }
     $rootScope.$emit('userAdded', user);
-  }
+  };
 
   this.addUsers = function(users) {
     for(var i = 0; i < users.length; i++) {
       this.addUser(users[i]);
     }
-  }
+  };
 
   this.addUsersFromLobby = function(lobby, cb) {
 
@@ -72,7 +92,7 @@ app.service('UserService', function($rootScope) {
     for(var i = 0; i < lobby.messages.length; i++) {
       var msg = lobby.messages[i];
       var fromUser = msg.from;
-      if(fromUser != null && !(fromUser in userDict)) {
+      if(fromUser !== null && !(fromUser in userDict)) {
         usersToFetch.push(fromUser);
       }
     }
@@ -86,7 +106,7 @@ app.service('UserService', function($rootScope) {
   };
 
   this.userWithID = function(userID) {
-    if(userID == null) {
+    if(userID === null) {
       return null;
     }
     return userDict[userID];
@@ -102,11 +122,11 @@ app.service('MessagingService', function($rootScope, UserService) {
   var messages = [];
 
   this.addMessage = function(msg) {
-    if(msg != null) {
-      if(msg.from != null) {
+    if(msg !== null) {
+      if(msg.from !== null) {
         msg.from = UserService.userWithID(msg.from);
       }
-      msg.isSystemMessage = (msg.from == null);
+      msg.isSystemMessage = (msg.from === null);
       messages.push(msg);
       $rootScope.$emit('newMessage', msg);
     }
@@ -141,6 +161,27 @@ app.service('LobbyConfigService', function($rootScope, UserService) {
   this.changeHost = function(newHostID) {
     host = UserService.userWithID(newHostID);
     $rootScope.$emit('hostChanged', host);
+  };
+});
+
+app.service('GameStateService', function($rootScope, UserService) {
+
+  var commonState = null;
+  var lock = null;
+
+  this.init = function(commonState, lock) {
+    this.updateCommonState(commonState);
+    this.updateLock(lock);
+  };
+
+  this.updateCommonState = function(newState) {
+    commonState = newState;
+    $rootScope.$emit('commonStateUpdated', commonState);
+  };
+
+  this.updateLock = function(lockUserID) {
+    lock = UserService.userWithID(lockUserID);
+    $rootScope.$emit('lockUpdated', lockUserID);
   };
 });
 
