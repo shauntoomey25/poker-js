@@ -41,7 +41,7 @@ app.controller('PokerCtrl', function($scope, $rootScope, UserService) {
 
       var players = state.players;
       for(var i = 0; i < players.length; i++) {
-        player = players[i];
+        var player = players[i];
         var user = UserService.userWithID(player.userId);
         if(user) {
           player.username = user.username;
