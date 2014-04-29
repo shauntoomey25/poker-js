@@ -4,35 +4,9 @@
 
 var app = angular.module('pokerJS.controllers', []);
 
-app.controller('MainCtrl', function($location, EventService) {
-  
-  (function() {
-
-    var urlParams = $location.search();
-    if(urlParams.lobby) {
-
-      // Lobby ID was provided in URL
-      // i.e. http://example.com/?lobby=12345
-      EventService.setLobbyID(urlParams.lobby);
-
-    } else if(window.lobby) {
-      console.log("Reached there");
-      EventService.setLobbyID(window.lobby);
-    } else {  
-      // Manually prompt the user for the lobby ID
-      lobbyID = null;
-      while(true) {
-        console.log("Reached here");
-        var lobbyID = prompt("Please enter the ID of the lobby you would like to spectate:");
-        if (lobbyID != null && lobbyID.length > 0) {
-          EventService.setLobbyID(lobbyID);
-          break;
-        }
-      }
-
-    }
-  })();
-
+app.controller('MainCtrl', function() {
+  // Currently nothing to do here
+  // Note: app initialization moved to bootstrap.js outside of Angular's scope
 });
 
 app.controller('PokerCtrl', function($scope, $rootScope) {

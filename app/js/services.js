@@ -10,6 +10,7 @@ app.service('EventService', function($rootScope, UserService, MessagingService, 
   // Must set Lobby ID before anything can be populated
   this.setLobbyID = angular.bind($rootScope, function(id) {
     $rootScope.lobbyID = id;
+    $rootScope.$apply();
     socket.post('/public/subscribeToLobby', {lobby: id}, function(data) {
       var lobby = data.lobby;
       var commonState = data.commonState;

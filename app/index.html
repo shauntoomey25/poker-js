@@ -11,54 +11,6 @@
   <script>
       // Ensure that links are relative to the proper root directory
       document.write('<base href="' + document.location + '" />');
-
-      window.onload = function() {
-        var isChromecast = navigator.userAgent.indexOf('CrKey') !== -1;
-        if(isChromecast)
-        {
-          console.log("Is Chromecast!");
-          cast.receiver.logger.setLevelValue(0);
-          window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
-          console.log('Starting Receiver Manager');
-          
-          // handler for the 'ready' event
-          castReceiverManager.onReady = function(event) {
-            console.log('Received Ready event: ' + JSON.stringify(event.data));
-            window.castReceiverManager.setApplicationState("Application status is ready...");
-          };
-          
-          // handler for 'senderconnected' event
-          castReceiverManager.onSenderConnected = function(event) {
-            console.log('Received Sender Connected event: ' + event.data);
-            console.log(window.castReceiverManager.getSender(event.data).userAgent);
-            window.castReceiverManager.setApplicationState("Ready");
-          };
-          
-          // handler for 'senderdisconnected' event
-          castReceiverManager.onSenderDisconnected = function(event) {
-            console.log('Received Sender Disconnected event: ' + event.data);
-            if (window.castReceiverManager.getSenders().length == 0) {
-              window.close();
-            }
-          };
-
-          // create a CastMessageBus to handle messages for a custom namespace
-          window.messageBus =
-            window.castReceiverManager.getCastMessageBus(
-                'urn:x-cast:com.gameframe.pokergame');
-
-          // handler for the CastMessageBus message event
-          window.messageBus.onMessage = function(event) {
-            var message = event.data;
-            console.log("Message received: " + message);
-            window.lobby = message;
-          }
-
-          // initialize the CastReceiverManager with an application status message
-          window.castReceiverManager.start({statusText: "Application is starting"});
-          console.log('Receiver Manager started');
-        }
-      };
   </script>
 </head>
 
@@ -70,6 +22,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/purl/purl.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
@@ -82,18 +35,6 @@
   <script src="js/controllers.js"></script>
   <script src="js/directives.js"></script>
   <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
-  <script type="text/javascript">
-    // Make request to server to get cookie
-    serverURL = 'http://gameframe.dyndns.org';
-    $.ajax({
-      url: serverURL+'/ping',
-      xhrFields: {
-        withCredentials: true
-     }
-    }).done(function() {
-      socket = io.connect(serverURL);
-      angular.bootstrap(document, ['pokerJS']);
-    });
-  </script>
+  <script src="js/bootstrap.js"></script>
 </body>
 </html>
