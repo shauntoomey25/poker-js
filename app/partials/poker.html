@@ -41,7 +41,18 @@
           </div>
         </div>
 
-        <!-- TODO: Player Table Content rows -->
+        <!-- Player Table Content rows -->
+        <div ng-repeat="player in players" class="row">
+          <div class="col-md-2">
+            <img ng-show="player.isDealer" src="images/dealer.svg">
+          </div>
+          <div ng-class="player.isBetting ? '' : 'folded'" class="col-md-6">
+            <p>{{player.username}}</p>
+          </div>
+          <div class="col-md-4">
+            <p>{{player.money}}</p>
+          </div>
+        </div>
 
       </div>
 

@@ -9,7 +9,7 @@ app.controller('MainCtrl', function() {
   // Note: app initialization moved to bootstrap.js outside of Angular's scope
 });
 
-app.controller('PokerCtrl', function($scope, $rootScope) {
+app.controller('PokerCtrl', function($scope, $rootScope, UserService) {
 
   // Scope
   $scope.isWaitingForMatch = true;
@@ -17,6 +17,7 @@ app.controller('PokerCtrl', function($scope, $rootScope) {
   $scope.userInLock = null;
   $scope.communityCards = null;
   $scope.potSize = null;
+  $scope.players = null;
 
   // Listeners
   $rootScope.$on('lobbyNameChanged', function(e, lobbyName) {
@@ -37,6 +38,18 @@ app.controller('PokerCtrl', function($scope, $rootScope) {
       $scope.isWaitingForMatch = false;
       $scope.communityCards = state.communityCards;
       $scope.potSize = state.pot;
+
+      var players = state.players;
+      for(var i = 0; i < players.length; i++) {
+        player = players[i];
+        var user = UserService.userWithID(player.userId);
+        if(user) {
+          player.username = user.username;
+        }
+        player.isBetting = $.inArray(player.userId, state.bettingPlayers);
+        player.isDealer = (player.userId == state.dealer);
+      }
+      $scope.players = players;
     });
   });
 });
