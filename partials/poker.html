@@ -42,9 +42,12 @@
         </div>
 
         <!-- Player Table Content rows -->
-        <div ng-repeat="player in players" class="row">
+        <div ng-repeat="player in players" class="row player-table-row">
           <div class="col-md-2">
-            <img ng-show="player.isDealer" src="images/dealer.svg">
+            <svg ng-show="player.isDealer" width="32" height="32">
+              <circle cx="16" cy="16" r="15" stroke="black" fill="white" stroke-width="2px"></circle>
+              <text dx="8" dy="25" font-size="24px">D</text>
+            </svg>
           </div>
           <div ng-class="player.isBetting ? '' : 'folded'" class="col-md-6">
             <p>{{player.username}}</p>
