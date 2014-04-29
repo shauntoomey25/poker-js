@@ -46,7 +46,7 @@ app.controller('PokerCtrl', function($scope, $rootScope, UserService) {
         if(user) {
           player.username = user.username;
         }
-        player.isBetting = $.inArray(player.userId, state.bettingPlayers);
+        player.isBetting = ($.inArray(player.userId, state.bettingPlayers) > -1);
         player.isDealer = (player.userId == state.dealer);
       }
       $scope.players = players;
