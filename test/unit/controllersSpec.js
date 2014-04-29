@@ -3,11 +3,11 @@
 /* jasmine specs for controllers go here */
 
 describe('controllers', function(){
-  beforeEach(module('myApp.controllers'));
+  beforeEach(module('pokerJS.controllers'));
 
-  it('should ....', inject(function($controller) {
-    //spec body
+  it('should define MainCtrl at startup', inject(function($controller) {
     var mainCtrl = $controller('MainCtrl');
     expect(mainCtrl).toBeDefined();
   }));
+
 });
