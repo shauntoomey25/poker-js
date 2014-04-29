@@ -15,24 +15,14 @@ app.controller('MainCtrl', function($location, EventService) {
       // i.e. http://example.com/?lobby=12345
       EventService.setLobbyID(urlParams.lobby);
 
-    } else if(navigator.userAgent.indexOf("crKey") > -1) {
-
-      // Connecting via Chromecast
-    	this.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
-    	this.customMessageBus = castReceiverManager.getCastMessageBus('urn:x-cast:com.gameframe.pokergame');
-    	this.customMessageBus.onMessage = function(event) {
-    		var message = event.data;
-    		if(message.command == 'start') {
-      		EventService.setLobbyID(message.lobby);
-    		}
-    	}
-    	this.castReceiverManager.start();
-
-    } else {
-
+    } else if(window.lobby) {
+      console.log("Reached there");
+      EventService.setLobbyID(window.lobby);
+    } else {  
       // Manually prompt the user for the lobby ID
       lobbyID = null;
       while(true) {
+        console.log("Reached here");
         var lobbyID = prompt("Please enter the ID of the lobby you would like to spectate:");
         if (lobbyID != null && lobbyID.length > 0) {
           EventService.setLobbyID(lobbyID);
