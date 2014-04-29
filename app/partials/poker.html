@@ -18,8 +18,8 @@
   <div class="card-row">  
     <div ng-repeat="card in communityCards" class="card-container">
       <div ng-switch on="card.visible" class="card">
-        <img ng-switch-when="true" ng-src="/images/cards/{{card.suit}}-{{card.rank}}.svg">
-        <img ng-switch-default ng-src="/images/cards/Red_Back.svg">
+        <img ng-switch-when="true" ng-src="images/cards/{{card.suit}}-{{card.rank}}.svg">
+        <img ng-switch-default ng-src="images/cards/Red_Back.svg">
       </div>
     </div>
   </div>
