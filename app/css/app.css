@@ -21,6 +21,10 @@ html, body {
   height: 100%;
 }
 
+.align-right {
+  text-align: right;
+}
+
 /* Poker Pane */
 
 #poker-pane {
@@ -66,6 +70,7 @@ html, body {
 
 .folded {
   text-decoration: line-through;
+  color: gray !important;
 }
 
 .pot-description {
