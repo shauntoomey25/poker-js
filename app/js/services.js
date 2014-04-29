@@ -32,6 +32,8 @@ app.service('EventService', function($rootScope, UserService, MessagingService, 
 
     socket.on('lobby', function(message) {
       var data = message.data.data;
+      console.log('new lobby::' + message.data.event + ' message:');
+      console.log(data);
       switch(message.data.event) {
 
         case 'userAdded':
@@ -52,6 +54,8 @@ app.service('EventService', function($rootScope, UserService, MessagingService, 
 
     socket.on('match', function(message) {
       var data = message.data.data;
+      console.log('new match::' + message.data.event + ' message:');
+      console.log(data);
       switch(message.data.event) {
 
         case 'commonStateUpdated':
