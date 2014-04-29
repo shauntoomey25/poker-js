@@ -71,7 +71,7 @@ app.service('UserService', function($rootScope) {
   var userDict = {};
 
   this.addUser = function(user) {
-    if(user !== null && user.id !== null) {
+    if(user != null && user.id != null) {
       userDict[user.id] = user;
     }
     $rootScope.$emit('userAdded', user);
@@ -93,7 +93,7 @@ app.service('UserService', function($rootScope) {
     for(var i = 0; i < lobby.messages.length; i++) {
       var msg = lobby.messages[i];
       var fromUser = msg.from;
-      if(fromUser !== null && !(fromUser in userDict)) {
+      if(fromUser != null && !(fromUser in userDict)) {
         usersToFetch.push(fromUser);
       }
     }
@@ -107,7 +107,7 @@ app.service('UserService', function($rootScope) {
   };
 
   this.userWithID = function(userID) {
-    if(userID === null) {
+    if(userID == null) {
       return null;
     }
     return userDict[userID];
@@ -123,11 +123,11 @@ app.service('MessagingService', function($rootScope, UserService) {
   var messages = [];
 
   this.addMessage = function(msg) {
-    if(msg !== null) {
-      if(msg.from !== null) {
+    if(msg != null) {
+      if(msg.from != null) {
         msg.from = UserService.userWithID(msg.from);
       }
-      msg.isSystemMessage = (msg.from === null);
+      msg.isSystemMessage = (msg.from == null);
       messages.push(msg);
       $rootScope.$emit('newMessage', msg);
     }
