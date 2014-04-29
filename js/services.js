@@ -128,8 +128,8 @@ app.service('MessagingService', function($rootScope, UserService) {
   var messages = [];
 
   this.addMessage = function(msg) {
-    if(!msg) {
-      if(!msg.from) {
+    if(msg) {
+      if(msg.from) {
         msg.from = UserService.userWithID(msg.from);
       }
       msg.isSystemMessage = (msg.from == null);
