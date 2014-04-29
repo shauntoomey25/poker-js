@@ -15,6 +15,7 @@
 
   <h1 id="poker-pane-header">{{lobby_name}}</h1>
 
+  <!-- Display the 5 community cards -->
   <div class="card-row">  
     <div ng-repeat="card in communityCards" class="card-container">
       <div ng-switch on="card.visible" class="card">
@@ -22,6 +23,17 @@
         <img ng-switch-default ng-src="images/cards/Red_Back.svg">
       </div>
     </div>
+  </div>
+
+  <div class="container-fluid">
+
+    <!-- Display the pot size floated to the right -->
+    <div class="row">
+      <div class="span12">
+        <p class="pull-right">Pot: ${{potSize}}</p>
+      </div>
+    </div>
+
   </div>
 
 </div>
