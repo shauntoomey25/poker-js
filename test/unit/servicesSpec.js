@@ -27,4 +27,41 @@ describe('Services', function() {
 
   });
 
+  describe('MessagingService', function() {
+
+    it('should store a single user message', inject(function(MessagingService, UserService) {
+      UserService.addUser({id: '1', name: 'TEST'});
+      MessagingService.addMessage({from: '1', content: 'HI'});
+      var messages = MessagingService.getMessages();
+      expect(messages.length).toEqual(1);
+      var message = messages[0];
+      expect(message.from.id).toEqual('1');
+      expect(message.from.name).toEqual('TEST');
+      expect(message.content).toEqual('HI');
+    }));
+
+    it('should store a single system message', inject(function(MessagingService) {
+      MessagingService.addMessage({from: null, content: 'HI'});
+      var messages = MessagingService.getMessages();
+      expect(messages.length).toEqual(1);
+      var message = messages[0];
+      expect(message.content).toEqual('HI');
+    }));
+
+    it('should be able to add multiple messages simultaneously',
+        inject(function(MessagingService, UserService) {
+      UserService.addUser({id: '1', name: 'TEST'});
+      MessagingService.addMessages([{from: '1', content: 'HI1'}, {from: null, content: 'HI2'}]);
+      var messages = MessagingService.getMessages();
+      expect(messages.length).toEqual(2);
+      var message1 = messages[0];
+      expect(message1.from.id).toEqual('1');
+      expect(message1.from.name).toEqual('TEST');
+      expect(message1.content).toEqual('HI1');
+      var message2 = messages[1];
+      expect(message2.content).toEqual('HI2');
+    }));
+
+  });
+
 });
