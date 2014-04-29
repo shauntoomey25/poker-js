@@ -187,7 +187,7 @@ app.service('GameStateService', function($rootScope, UserService) {
 
   this.updateLock = function(lockUserID) {
     lock = UserService.userWithID(lockUserID);
-    $rootScope.$emit('lockUpdated', lockUserID);
+    $rootScope.$emit('lockUpdated', lock);
   };
 });
 
