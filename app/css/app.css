@@ -52,6 +52,13 @@ html, body {
   text-align: center;
 }
 
+.player-table-headers {
+  font-size: xx-large;
+  color: white;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 .pot-description {
   font-size: xx-large;
   color: white;

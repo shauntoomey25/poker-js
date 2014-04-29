@@ -26,12 +26,37 @@
   </div>
 
   <div class="container-fluid">
-
-    <!-- Display the pot size floated to the right -->
     <div class="row">
-      <div class="col-md-12">
-        <p class="pot-description pull-right">Current Pot: ${{potSize}}</p>
+
+      <!-- Player Table -->
+      <div class="col-md-6">
+
+        <!-- Player Table Headers row -->
+        <div class="row">
+          <div class="col-md-offset-2 col-md-6">
+            <p class="player-table-header">Players</p>
+          </div>
+          <div class="col-md-4">
+            <p class="player-table-header">Chip Count</p>
+          </div>
+        </div>
+
+        <!-- TODO: Player Table Content rows -->
+
       </div>
+
+      <!-- Side Table -->
+      <div class="col-md-6">
+
+        <!-- Display the pot size floated to the right -->
+        <div class="row">  
+          <div class="col-md-offset-9 col-md-3">
+            <p class="pot-description pull-right">Current Pot: ${{potSize}}</p>
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
   </div>
