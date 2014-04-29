@@ -50,8 +50,13 @@ app.controller('ChatCtrl', function($scope, $rootScope, $timeout) {
   // Listeners
   $rootScope.$on('newMessage', function(e, msg) {
     $scope.$apply(function(){
-        $scope.chat_title = "Lobby Chat";
         $scope.messages.push(msg);
+    });
+  });
+
+  $rootScope.$on('newLobby', function(e, lobby) {
+    $scope.$apply(function() {
+      $scope.chat_title = "Lobby Chat";
     });
   });
 });
