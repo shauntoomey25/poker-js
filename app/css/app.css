@@ -59,6 +59,11 @@ html, body {
   text-decoration: underline;
 }
 
+.player-table-row {
+  font-size: x-large;
+  color: cornsilk;
+}
+
 .folded {
   text-decoration: line-through;
 }
