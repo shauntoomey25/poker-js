@@ -21,6 +21,7 @@ app.service('EventService', function($rootScope, UserService, MessagingService, 
         if(commonState && lock) {
           GameStateService.init(commonState, lock);
         }
+        $rootScope.$emit('newLobby', lobby);
       };
       UserService.addUsersFromLobby(lobby, afterAllUsersRetrieved);
     });
