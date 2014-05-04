@@ -40,6 +40,13 @@ function getLobbyID(EventService) {
       window.castReceiverManager.setApplicationState("Ready");
     };
 
+    castReceiverManager.onSenderDisconnected = function(event) {
+      console.log('Received Sender Disconnected event: ' + event.data);
+      if (window.castReceiverManager.getSenders().length == 0) {
+        window.close();
+      }
+    };
+
     window.messageBus =
         window.castReceiverManager.getCastMessageBus('urn:x-cast:com.gameframe.pokergame');
 
