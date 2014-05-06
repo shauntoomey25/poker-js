@@ -37,7 +37,7 @@ app.service('EventService', function($rootScope, UserService, MessagingService, 
       switch(message.data.event) {
 
         case 'userAdded':
-          UserService.addUser(data.state);
+          UserService.addUser(data);
           break;
 
         case 'newUserMessage':
