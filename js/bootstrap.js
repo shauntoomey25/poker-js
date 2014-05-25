@@ -3,7 +3,7 @@
 
 function bootstrap() {
   // Make request to server to get cookie
-  serverURL = 'http://gameframe.dyndns.org';
+  serverURL = 'http://107.170.181.143';
   $.ajax({
     url: serverURL+'/ping',
     xhrFields: {
